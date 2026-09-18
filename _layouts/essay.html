@@ -256,7 +256,53 @@
     .article-body a {
       text-underline-offset: 4px;
     }
-
+      .github-promo {
+    max-width: 664px;
+    margin: 0 auto 72px;
+    padding: 34px;
+    text-align: center;
+    background: var(--paper-dark);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  
+  .github-label {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+  }
+  
+  .github-promo h2 {
+    margin: 0;
+    font-family: "Noto Serif KR", serif;
+    font-size: 1.45rem;
+  }
+  
+  .github-description {
+    margin: 14px auto 22px;
+    color: var(--muted);
+    font-size: 0.94rem;
+    word-break: keep-all;
+  }
+  
+  .github-button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    color: #fffaf0;
+    background: var(--accent);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .github-button:hover {
+    background: var(--accent-dark);
+  }
     .article-navigation {
       display: flex;
       align-items: center;
@@ -405,12 +451,32 @@
         <div class="article-body">
           {{ content }}
         </div>
-
+        
+        <aside class="github-promo" aria-label="GitHub 저장소 소개">
+          <p class="github-label">MORE ON GITHUB</p>
+        
+          <h2>책과 실습 자료도 함께 살펴보세요.</h2>
+        
+          <p class="github-description">
+            머신러닝과 딥러닝을 직접 실행하며 배울 수 있는 코드와
+            관련 자료를 GitHub에서 확인할 수 있습니다.
+          </p>
+        
+          <a
+            class="github-button"
+            href="https://github.com/hongjai-rhee/public"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub 저장소 방문하기 &rarr;
+          </a>
+        </aside>
+        
         <nav class="article-navigation" aria-label="글 이동">
           <a href="{{ '/essay/' | relative_url }}">
             &larr; 전체 글 목록
           </a>
-
+        
           <a href="{{ '/' | relative_url }}">
             잡지 표지로 &rarr;
           </a>
