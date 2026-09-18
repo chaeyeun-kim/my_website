@@ -2,8 +2,11 @@
 layout: essay
 title: "AI는 어떻게 학습하는가?"
 description: "초보 어부의 이야기로 알아보는 머신러닝의 원리"
-author: 이홍재
+author: "이홍재"
 date: 2026-09-18
+reading_time: "약 6분"
+issue: "01"
+category: "머신러닝"
 ---
 
 # AI는 어떻게 학습하는가?
