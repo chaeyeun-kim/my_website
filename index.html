@@ -3,59 +3,526 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>코드 없는 쉬운 설명</title>
 
+  <meta
+    name="description"
+    content="AI와 기술을 코드와 복잡한 수식 없이 일상의 비유로 설명합니다."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+    :root {
+      --background: #e9dfca;
+      --paper: #fbf7ec;
+      --paper-dark: #efe3ca;
+      --ink: #302a23;
+      --muted: #766c5e;
+      --accent: #984f3e;
+      --accent-dark: #74392d;
+      --line: #d7c8aa;
+      --shadow: rgba(75, 59, 38, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      max-width: 720px;
-      margin: 60px auto;
-      padding: 0 24px;
-      font-family: sans-serif;
-      line-height: 1.7;
-      color: #222;
-    }
-
-    h1 {
-      margin-bottom: 8px;
-    }
-
-    .description {
-      color: #666;
-      margin-bottom: 40px;
-    }
-
-    .article {
-      padding: 24px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
+      margin: 0;
+      padding: 32px 18px;
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(255, 255, 255, 0.55),
+          transparent 34%
+        ),
+        linear-gradient(135deg, #e6dbc5, #eee5d3);
+      font-family: "Noto Sans KR", sans-serif;
+      line-height: 1.75;
     }
 
     a {
-      color: #2563eb;
+      color: inherit;
+    }
+
+    .page {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid rgba(113, 89, 58, 0.2);
+      border-radius: 4px;
+      box-shadow: 0 22px 60px var(--shadow);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 54px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wordmark {
+      font-family: "Noto Serif KR", serif;
+      font-weight: 700;
       text-decoration: none;
+    }
+
+    .topbar nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .topbar nav a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+
+    .topbar nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 88px 54px 78px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 24px;
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: "Noto Serif KR", serif;
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.06em;
+      word-break: keep-all;
+    }
+
+    .hero h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .intro {
+      max-width: 620px;
+      margin: 30px auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      word-break: keep-all;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 38px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition:
+        transform 160ms ease,
+        background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      color: #fffaf0;
+      background: var(--accent);
+    }
+
+    .button.primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .button.secondary {
+      color: var(--accent);
+      background: transparent;
+    }
+
+    .button.secondary:hover {
+      background: rgba(152, 79, 62, 0.07);
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      margin: 0 54px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .issue {
+      display: flex;
+      min-height: 320px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 36px;
+      background: var(--paper-dark);
+      border-right: 1px solid var(--line);
+    }
+
+    .issue-label {
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+    }
+
+    .issue-number {
+      font-family: "Noto Serif KR", serif;
+      font-size: clamp(5rem, 13vw, 8rem);
+      font-weight: 700;
+      line-height: 0.85;
+      color: rgba(152, 79, 62, 0.78);
+    }
+
+    .article-preview {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 46px;
+    }
+
+    .article-preview .category {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .article-preview h2 {
+      margin: 0;
+      font-family: "Noto Serif KR", serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+    .article-preview .summary {
+      margin: 20px 0 0;
+      color: var(--muted);
+      word-break: keep-all;
+    }
+
+    .meta {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .read-link {
+      width: fit-content;
+      margin-top: 26px;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .read-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .principles {
+      padding: 84px 54px;
+    }
+
+    .section-label {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+    }
+
+    .principles h2,
+    .author h2 {
+      margin: 0;
+      font-family: "Noto Serif KR", serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .principle-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 42px;
+    }
+
+    .principle {
+      padding-top: 22px;
+      border-top: 2px solid var(--accent);
+    }
+
+    .principle .number {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-family: "Noto Serif KR", serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .principle strong {
+      display: block;
+      font-family: "Noto Serif KR", serif;
+      font-size: 1.18rem;
+    }
+
+    .principle p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .author {
+      margin: 0 54px 70px;
+      padding: 42px;
+      background: #f2e9d7;
+      border: 1px solid var(--line);
+    }
+
+    .author p {
+      max-width: 650px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      word-break: keep-all;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 26px 54px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.82rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(152, 79, 62, 0.35);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 0;
+      }
+
+      .page {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .topbar {
+        padding: 20px 22px;
+      }
+
+      .topbar nav {
+        gap: 14px;
+      }
+
+      .hero {
+        padding: 70px 24px 62px;
+      }
+
+      .featured {
+        grid-template-columns: 1fr;
+        margin: 0 24px;
+      }
+
+      .issue {
+        min-height: 210px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .article-preview {
+        padding: 34px 26px 40px;
+      }
+
+      .principles {
+        padding: 70px 24px;
+      }
+
+      .principle-list {
+        grid-template-columns: 1fr;
+      }
+
+      .author {
+        margin: 0 24px 54px;
+        padding: 30px 26px;
+      }
+
+      footer {
+        flex-direction: column;
+        padding: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .button {
+        transition: none;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main>
-    <h1>코드 없는 쉬운 설명</h1>
-    <p class="description">
-      어렵게 말하지 않는 AI와 기술 이야기
-    </p>
+  <div class="page">
+    <header class="topbar">
+      <a class="wordmark" href="./">코드 없는 쉬운 설명</a>
 
-    <h2>전체 글</h2>
+      <nav aria-label="주요 메뉴">
+        <a href="essay/">전체 글</a>
+      </nav>
+    </header>
 
-    <article class="article">
-      <h3>
-        <a href="001-how-ai-learns.html">
-          01. AI는 어떻게 학습하는가?
-        </a>
-      </h3>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">WEEKLY ESSAY · AI &amp; TECHNOLOGY</p>
 
-      <p>초보 어부의 이야기로 알아보는 머신러닝의 원리</p>
-      <small>2026년 9월 18일 · 이홍재</small>
-    </article>
-  </main>
+        <h1>
+          코드 없이,<br>
+          <em>기술을 이해하는 시간.</em>
+        </h1>
+
+        <p class="intro">
+          AI와 기술은 궁금하지만 어려운 용어와 코드는 부담스러운
+          사람들을 위한 짧은 글입니다. 복잡한 개념을 일상의 경험과
+          비유로 풀어씁니다.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="essay/001-how-ai-learns.html">
+            첫 번째 글 읽기
+          </a>
+
+          <a class="button secondary" href="essay/">
+            전체 글 보기
+          </a>
+        </div>
+      </section>
+
+      <section class="featured" aria-labelledby="featured-title">
+        <div class="issue">
+          <span class="issue-label">ESSAY · ISSUE</span>
+          <span class="issue-number">01</span>
+        </div>
+
+        <article class="article-preview">
+          <p class="category">이번 주의 글</p>
+
+          <h2 id="featured-title">AI는 어떻게 학습하는가?</h2>
+
+          <p class="summary">
+            초보 어부는 어디에서 물고기를 잡아야 할지 어떻게 판단할까요?
+            아버지가 남긴 오래된 수첩을 통해 지도 학습과 강화 학습의
+            차이를 알아봅니다.
+          </p>
+
+          <p class="meta">약 6분 · 이홍재 · 2026년 9월 18일</p>
+
+          <a class="read-link" href="essay/001-how-ai-learns.html">
+            글 읽기 &rarr;
+          </a>
+        </article>
+      </section>
+
+      <section class="principles">
+        <p class="section-label">HOW TO READ</p>
+        <h2>이 연재를 읽는 방법</h2>
+
+        <div class="principle-list">
+          <article class="principle">
+            <span class="number">01</span>
+            <strong>코드 없이</strong>
+            <p>
+              코드를 몰라도 이야기의 흐름을 따라갈 수 있도록 설명합니다.
+            </p>
+          </article>
+
+          <article class="principle">
+            <span class="number">02</span>
+            <strong>하나의 개념</strong>
+            <p>
+              한 편에서 하나의 질문만 다루며 핵심에 집중합니다.
+            </p>
+          </article>
+
+          <article class="principle">
+            <span class="number">03</span>
+            <strong>일상의 비유</strong>
+            <p>
+              전문 용어보다 익숙한 경험과 장면을 먼저 사용합니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="author">
+        <p class="section-label">ABOUT THE WRITER</p>
+        <h2>이홍재</h2>
+
+        <p>
+          AI 모델의 원리를 이해하고 직접 만드는 방법을 공부하고 있습니다.
+          어렵게 배운 내용을 더 쉬운 언어로 다시 설명합니다.
+          새로운 글은 매주 한두 편씩 올립니다.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 코드 없는 쉬운 설명</span>
+      <a href="essay/">전체 글 목록 보기</a>
+    </footer>
+  </div>
 </body>
 </html>
