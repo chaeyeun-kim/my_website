@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: essay
 title: "AI는 어떻게 학습하는가?"
 description: "초보 어부의 이야기로 알아보는 머신러닝의 원리"
 author: 이홍재
