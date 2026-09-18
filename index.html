@@ -208,7 +208,7 @@
 
     .section-label {
       display: block;
-      margin-bottom: 15px;
+      margin: 0 0 15px;
       color: var(--accent);
       font-size: 0.7rem;
       font-weight: 600;
@@ -285,7 +285,7 @@
       transform: translateY(-2px);
     }
 
-    /* 첫 번째 에세이 읽기 */
+    /* 첫 번째 에세이 */
 
     .latest-essay {
       margin-bottom: 88px;
@@ -416,23 +416,57 @@
 
     /* 저자 소개 */
 
-    .author-section {
+    .author {
       padding: 42px;
       background: var(--paper-dark);
       border: 1px solid var(--line);
     }
 
-    .author-section h2 {
-      margin: 0 0 20px;
+    .author h2 {
+      margin: 0 0 22px;
       font-size: 2.25rem;
       letter-spacing: -0.055em;
     }
 
-    .author-description {
-      margin: 0;
+    .author-bio {
+      max-width: 760px;
+      margin: 18px 0 0;
       color: var(--soft-ink);
       font-size: 0.94rem;
       line-height: 1.9;
+      word-break: keep-all;
+    }
+
+    .author h2 + .author-bio {
+      margin-top: 0;
+    }
+
+    .author-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 38px;
+      margin-top: 36px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .author-details h3 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-family: "Noto Serif KR", serif;
+      font-size: 1.15rem;
+    }
+
+    .author-details ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--soft-ink);
+    }
+
+    .author-details li {
+      margin: 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.7;
     }
 
     .site-footer {
@@ -531,8 +565,13 @@
         border-left: 0;
       }
 
-      .author-section {
+      .author {
         padding: 32px 28px;
+      }
+
+      .author-details {
+        grid-template-columns: 1fr;
+        gap: 26px;
       }
 
       .site-footer {
@@ -682,7 +721,9 @@
         aria-labelledby="latest-essay-title"
       >
         <div class="section-heading">
-          <h2 id="latest-essay-title">첫 번째 에세이</h2>
+          <h2 id="latest-essay-title">
+            첫 번째 에세이
+          </h2>
 
           <a href="./essay/">
             전체 글 보기 →
@@ -755,20 +796,61 @@
       </section>
 
       <section
-        class="author-section"
+        class="author"
         aria-labelledby="author-title"
       >
-        <span class="section-label">ABOUT THE WRITER</span>
+        <p class="section-label">ABOUT THE WRITER</p>
 
         <h2 id="author-title">이홍재</h2>
 
-        <p class="author-description">
-          아주대학교 경영대학에서 마케팅 애널리틱스와
-          빅데이터 분석을 강의하고 있습니다.
-          데이터 분석과 머신러닝을 연구하고 가르치며,
-          어렵게 느껴지는 기술을 누구나 이해할 수 있는
-          일상의 언어로 설명하는 글을 씁니다.
+        <p class="author-bio">
+          아주대학교 경영대학에서 ‘마케팅 애널리틱스’와
+          ‘빅데이터 분석’을 강의하고 있습니다.
+          오지 여행과 등산, 사진 찍기를 좋아하며,
+          해마다 신춘문예에 도전하고 있습니다.
         </p>
+
+        <p class="author-bio">
+          자신의 큰 불편은 참아도 아이들의 작은 불편은
+          지나치지 못하는 평범한 부모이자 세 아이의 아버지입니다.
+          국내외 학술지에 데이터 분석과 머신러닝에 관한
+          다수의 논문을 발표했으며, 국무총리 표창과
+          아주대학교 교육우수상을 여러 차례 받았습니다.
+        </p>
+
+        <div class="author-details">
+          <section aria-labelledby="education-title">
+            <h3 id="education-title">학력</h3>
+
+            <ul>
+              <li>
+                미국 UCLA 경제학 박사 — 계량경제학 전공
+              </li>
+
+              <li>
+                서울대학교 경제학과 졸업
+              </li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="career-title">
+            <h3 id="career-title">경력</h3>
+
+            <ul>
+              <li>
+                미국 Caltech 부연구원 — Research Associate
+              </li>
+
+              <li>
+                정보통신정책연구원(KISDI) 연구위원
+              </li>
+
+              <li>
+                현 아주대학교 경영학과 교수
+              </li>
+            </ul>
+          </section>
+        </div>
       </section>
 
       <footer class="site-footer">
