@@ -325,7 +325,48 @@
       color: var(--muted);
       word-break: keep-all;
     }
-
+    
+    .author-bio {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.9;
+      word-break: keep-all;
+    }
+    
+    .author-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 38px;
+      margin-top: 36px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+    
+    .author-details h3 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-family: "Noto Serif KR", serif;
+      font-size: 1.15rem;
+    }
+    
+    .author-details ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+    
+    .author-details li {
+      margin: 8px 0;
+      line-height: 1.7;
+    }
+    
+    @media (max-width: 720px) {
+      .author-details {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+    }
     footer {
       display: flex;
       justify-content: space-between;
@@ -510,28 +551,39 @@
       <section class="author">
         <p class="section-label">ABOUT THE WRITER</p>
         <h2>이홍재</h2>
-
-        <p>
-          아주대학교 경영대학에서 “마케팅 애널리틱스”와 “빅데이터 분석”을 강의하고 있다. 
-          오지 여행과 등산, 사진찍기를 좋아하며, 해마다 신춘문예에 도전해서 낙방의 쓴맛을 보고 있다. 
-          나의 큰 불편은 참아도 아이들의 작은 불편은 못 참는 이 땅의 평범한 부모로 세 아이의 아버지이다. 
-          국내외 학술지에 데이터분석과 머신러닝에 관한 다수의 논문을 발표하였으며, 국무총리 표창과 아주대학교 교육우수상을 수차례 받았다.
-<br>
-          -서울대학교 경제학과 졸업
-          -미국 UCLA 경제학 박사 (계량경제학 전공)
-          -미국 Caltech 부연구원 (research associate)
-          -정보통신정책연구원(KISDI) 연구위원
-          -현 아주대학교 경영학과 교수
-<br>
-          **학력**
-          미국 UCLA 경제학 박사 (계량경제학 전공)
-          서울대학교 경제학과 졸업
-<br>
-          **경력**
-          미국 Caltech 부연구원 (research associate)
-          정보통신정책연구원(KISDI) 연구위원
-          아주대학교 경영학과 교수
-        </p>
+    
+      <p class="author-bio">
+        아주대학교 경영대학에서 ‘마케팅 애널리틱스’와 ‘빅데이터 분석’을
+        강의하고 있습니다. 오지 여행과 등산, 사진 찍기를 좋아하며,
+        해마다 신춘문예에 도전하고 있습니다.
+      </p>
+    
+      <p class="author-bio">
+        자신의 큰 불편은 참아도 아이들의 작은 불편은 지나치지 못하는
+        평범한 부모이자 세 아이의 아버지입니다. 국내외 학술지에
+        데이터 분석과 머신러닝에 관한 다수의 논문을 발표했으며,
+        국무총리 표창과 아주대학교 교육우수상을 여러 차례 받았습니다.
+      </p>
+    
+      <div class="author-details">
+        <section>
+          <h3>학력</h3>
+    
+          <ul>
+            <li>미국 UCLA 경제학 박사 — 계량경제학 전공</li>
+            <li>서울대학교 경제학과 졸업</li>
+          </ul>   
+        <section>
+          <h3>경력</h3>
+    
+          <ul>
+            <li>미국 Caltech 부연구원 — Research Associate</li>
+            <li>정보통신정책연구원(KISDI) 연구위원</li>
+            <li>현 아주대학교 경영학과 교수</li>
+          </ul>
+        </section>
+      </div>
+    </section>
       </section>
     </main>
 
