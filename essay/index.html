@@ -1,16 +1,17 @@
 ---
 ---
+{% assign essays = site.pages | where: "layout", "essay" | sort: "date" | reverse %}
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{{ page.title | escape }} | 코드 없는 AI 스토리</title>
+  <title>전체 글 | 코드 없는 AI 스토리</title>
 
   <meta
     name="description"
-    content="{{ page.description | default: site.description | escape }}"
+    content="코드 없는 AI 스토리의 전체 에세이 목록"
   >
 
   <link
@@ -47,7 +48,7 @@
 
       background:
         radial-gradient(
-          circle at 9% 5%,
+          circle at 8% 6%,
           rgba(22, 189, 210, 0.13),
           transparent 26%
         ),
@@ -68,12 +69,12 @@
         "Malgun Gothic",
         sans-serif;
 
-      line-height: 1.85;
+      line-height: 1.75;
       word-break: keep-all;
     }
 
     a {
-      color: var(--purple);
+      color: inherit;
     }
 
     .page {
@@ -89,7 +90,7 @@
       box-shadow: 0 24px 70px rgba(75, 39, 123, 0.11);
     }
 
-    .topbar {
+    .site-header {
       position: relative;
       z-index: 10;
 
@@ -104,114 +105,134 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .wordmark {
-      color: var(--ink);
+    .site-title,
+    .home-link {
+      text-decoration: none;
+    }
+
+    .site-title {
       font-size: 1.08rem;
       font-weight: 800;
       letter-spacing: -0.035em;
-      text-decoration: none;
     }
 
-    .topbar nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .topbar nav a {
+    .home-link {
       color: var(--muted);
-      font-size: 0.87rem;
+      font-size: 0.9rem;
       font-weight: 650;
-      text-decoration: none;
     }
 
-    .wordmark:hover,
-    .topbar nav a:hover {
+    .site-title:hover,
+    .home-link:hover {
       color: var(--purple);
     }
 
-    .article-header {
+    main {
+      padding: 0 52px 76px;
+    }
+
+    .hero {
       position: relative;
 
-      padding: 88px 62px 70px;
+      margin: 0 -52px 62px;
+      padding: 82px 52px 65px;
       overflow: hidden;
-
-      text-align: center;
 
       background:
         linear-gradient(
-          155deg,
-          #ffffff 17%,
-          var(--cyan-soft) 56%,
+          125deg,
+          #ffffff 32%,
+          var(--cyan-soft) 72%,
           var(--purple-soft)
         );
 
       border-bottom: 1px solid var(--line);
     }
 
-    .article-header::before,
-    .article-header::after {
+    .hero::after {
       position: absolute;
-      border-radius: 50%;
-      content: "";
-      pointer-events: none;
-    }
-
-    .article-header::before {
-      top: -95px;
-      left: -65px;
-
-      width: 270px;
-      height: 270px;
-
-      background:
-        radial-gradient(
-          circle at 55% 55%,
-          rgba(255, 255, 255, 0.8),
-          rgba(22, 189, 210, 0.24),
-          transparent 70%
-        );
-    }
-
-    .article-header::after {
-      right: -70px;
-      bottom: -110px;
+      top: -105px;
+      right: -55px;
 
       width: 300px;
       height: 300px;
 
       background:
         radial-gradient(
-          circle at 40% 40%,
-          rgba(255, 255, 255, 0.84),
-          rgba(105, 54, 167, 0.2),
+          circle at 35% 35%,
+          rgba(255, 255, 255, 0.98),
+          rgba(22, 189, 210, 0.27),
+          rgba(105, 54, 167, 0.19) 62%,
           transparent 70%
         );
+
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
     }
 
-    .issue {
+    .orbit {
+      position: absolute;
+      top: 37px;
+      right: 18px;
+
+      width: 190px;
+      height: 190px;
+
+      border: 1px solid rgba(105, 54, 167, 0.25);
+      border-radius: 50%;
+
+      transform: rotate(-18deg) scaleY(0.46);
+      pointer-events: none;
+    }
+
+    .orbit::after {
+      position: absolute;
+      top: -8px;
+      left: 48px;
+
+      width: 13px;
+      height: 13px;
+
+      background: var(--cyan);
+      border: 5px solid var(--white);
+      border-radius: 50%;
+
+      content: "";
+    }
+
+    .eyebrow,
+    .section-label {
       position: relative;
       z-index: 2;
 
-      margin: 0 0 19px;
+      display: block;
+      margin: 0 0 14px;
 
       color: var(--purple);
       font-size: 0.72rem;
       font-weight: 800;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
     }
 
-    .article-header h1 {
+    .hero h1 {
       position: relative;
       z-index: 2;
 
-      max-width: 760px;
-      margin: 0 auto;
+      margin: 0;
 
+      font-size: clamp(3.2rem, 7vw, 4.8rem);
+      font-weight: 850;
+      line-height: 1.1;
+      letter-spacing: -0.06em;
+      overflow-wrap: anywhere;
+    }
+
+    .gradient-text {
       background:
         linear-gradient(
           92deg,
-          var(--cyan) 0%,
+          var(--cyan),
           #2498ca 43%,
           var(--purple) 92%
         );
@@ -219,195 +240,28 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-
-      font-size: clamp(2.8rem, 7vw, 4.65rem);
-      font-weight: 850;
-      line-height: 1.16;
-      letter-spacing: -0.06em;
-      overflow-wrap: anywhere;
     }
 
-    .description {
+    .hero-description {
       position: relative;
       z-index: 2;
 
       max-width: 620px;
-      margin: 24px auto 0;
+      margin: 22px 0 0;
 
       color: var(--muted);
       font-size: 1rem;
       line-height: 1.8;
     }
 
-    .meta {
-      position: relative;
-      z-index: 2;
+    .book-note {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 30px;
 
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-
-      margin-top: 25px;
-
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .meta span + span::before {
-      margin-right: 8px;
-      color: rgba(105, 54, 167, 0.42);
-      content: "·";
-    }
-
-    .article-body {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 68px 42px 82px;
-
-      color: #342f3b;
-      font-size: 1.02rem;
-      line-height: 1.95;
-      overflow-wrap: anywhere;
-    }
-
-    .article-body > :first-child {
-      margin-top: 0;
-    }
-
-    .article-body p {
-      margin: 1.35em 0;
-    }
-
-    .article-body h1 {
-      display: none;
-    }
-
-    .article-body h2 {
-      position: relative;
-
-      margin: 3.1em 0 1em;
-      padding: 0 0 13px 19px;
-
-      color: var(--ink);
-      font-size: 1.72rem;
-      font-weight: 820;
-      line-height: 1.45;
-      letter-spacing: -0.04em;
-
-      border-bottom: 1px solid var(--line);
-      overflow-wrap: anywhere;
-    }
-
-    .article-body h2::before {
-      position: absolute;
-      top: 0.18em;
-      bottom: 0.62em;
-      left: 0;
-
-      width: 5px;
-
-      background: linear-gradient(var(--cyan), var(--purple));
-      border-radius: 999px;
-
-      content: "";
-    }
-
-    .article-body h3 {
-      margin: 2.35em 0 0.8em;
-
-      color: var(--purple);
-      font-size: 1.28rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .article-body strong {
-      color: var(--purple-deep);
-    }
-
-    .article-body blockquote {
-      margin: 2em 0;
-      padding: 23px 26px;
-
-      color: #3b3150;
-
-      background:
-        linear-gradient(
-          110deg,
-          var(--cyan-soft),
-          var(--purple-soft)
-        );
-
-      border-left: 5px solid var(--purple);
-      border-radius: 0 14px 14px 0;
-
-      font-size: 1.03rem;
-      font-weight: 650;
-    }
-
-    .article-body blockquote p {
-      margin: 0;
-    }
-
-    .article-body table {
-      display: block;
-      width: 100%;
-      margin: 2.2em 0;
-      overflow-x: auto;
-
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      white-space: nowrap;
-    }
-
-    .article-body th,
-    .article-body td {
-      padding: 12px;
-      border: 1px solid var(--line);
-      text-align: left;
-    }
-
-    .article-body th {
-      color: var(--purple-deep);
-      background: var(--purple-soft);
-      font-weight: 750;
-    }
-
-    .article-body tr:nth-child(even) td {
-      background: rgba(232, 251, 255, 0.48);
-    }
-
-    .article-body code {
-      padding: 2px 7px;
-
-      color: var(--purple-deep);
-      background: var(--purple-soft);
-
-      border: 1px solid rgba(105, 54, 167, 0.16);
-      border-radius: 5px;
-
-      font-size: 0.9em;
-    }
-
-    .article-body hr {
-      margin: 3.5em 0;
-      border: 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .article-body a {
-      color: var(--purple);
-      font-weight: 650;
-      text-underline-offset: 4px;
-    }
-
-    .github-promo {
-      max-width: 650px;
-      margin: 0 auto 70px;
-      padding: 35px;
-
-      text-align: center;
+      margin-bottom: 76px;
+      padding: 34px 38px;
 
       background:
         linear-gradient(
@@ -421,65 +275,151 @@
       border-radius: 18px;
     }
 
-    .github-label {
-      margin: 0 0 10px;
-
-      color: var(--purple);
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-    }
-
-    .github-promo h2 {
+    .book-note h2 {
       margin: 0;
 
-      color: var(--ink);
-      font-size: 1.4rem;
+      font-size: 1.55rem;
       font-weight: 820;
-      letter-spacing: -0.035em;
+      line-height: 1.4;
+      letter-spacing: -0.04em;
+      overflow-wrap: anywhere;
     }
 
-    .github-description {
-      margin: 13px auto 21px;
+    .book-note p {
+      margin: 12px 0 0;
 
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.75;
     }
 
-    .github-button {
+    .book-button {
       display: inline-flex;
-      min-height: 45px;
       align-items: center;
       justify-content: center;
 
-      padding: 11px 21px;
+      padding: 12px 18px;
 
       background: var(--purple);
       border-radius: 999px;
 
       color: var(--white);
-      font-size: 0.87rem;
+      font-size: 0.85rem;
       font-weight: 750;
       text-decoration: none;
+      white-space: nowrap;
 
       transition:
         background 160ms ease,
         transform 160ms ease;
     }
 
-    .github-button:hover {
+    .book-button:hover {
       background: var(--purple-deep);
       transform: translateY(-2px);
     }
 
-    .article-navigation {
+    .list-heading {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 20px;
 
-      padding: 28px 52px;
+      margin-bottom: 23px;
+    }
+
+    .list-heading h2 {
+      margin: 0;
+
+      font-size: 2.2rem;
+      font-weight: 830;
+      letter-spacing: -0.05em;
+    }
+
+    .essay-count {
+      color: var(--purple);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .essay-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .essay-card {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 23px;
+
+      padding: 29px 31px;
+
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+
+      text-decoration: none;
+
+      transition:
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    .essay-card:hover {
+      border-color: rgba(105, 54, 167, 0.42);
+      box-shadow: 0 15px 35px rgba(86, 53, 166, 0.11);
+      transform: translateY(-3px);
+    }
+
+    .essay-number {
+      color: var(--cyan-deep);
+      font-size: 1.95rem;
+      font-weight: 850;
+    }
+
+    .essay-card h3 {
+      margin: 0 0 7px;
+
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      overflow-wrap: anywhere;
+    }
+
+    .essay-description {
+      margin: 0;
+
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .essay-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+
+      margin: 10px 0 0;
+
+      color: var(--muted);
+      font-size: 0.77rem;
+    }
+
+    .essay-meta span + span::before {
+      margin-right: 7px;
+      color: rgba(105, 54, 167, 0.42);
+      content: "·";
+    }
+
+    .essay-arrow {
+      color: var(--purple);
+      font-size: 1.7rem;
+      font-weight: 750;
+    }
+
+    .empty-state {
+      padding: 44px 28px;
 
       background:
         linear-gradient(
@@ -488,30 +428,21 @@
           var(--purple-soft)
         );
 
-      border-top: 1px solid var(--line);
-    }
-
-    .article-navigation a {
-      color: var(--purple);
-      font-size: 0.88rem;
-      font-weight: 750;
-      text-decoration: none;
-    }
-
-    .article-navigation a:hover {
-      text-decoration: underline;
-      text-underline-offset: 5px;
+      border-radius: 18px;
+      color: var(--muted);
+      text-align: center;
     }
 
     .site-footer {
       display: flex;
       justify-content: space-between;
-      gap: 20px;
+      gap: 18px;
 
-      padding: 23px 52px;
+      margin-top: 68px;
+      padding-top: 23px;
 
-      color: var(--muted);
       border-top: 1px solid var(--line);
+      color: var(--muted);
       font-size: 0.76rem;
     }
 
@@ -527,57 +458,75 @@
         margin: 10px auto;
       }
 
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
+      .site-header {
         padding: 21px 24px;
       }
 
-      .topbar nav {
-        gap: 14px;
+      main {
+        padding: 0 24px 54px;
       }
 
-      .article-header {
-        padding: 65px 25px 52px;
+      .hero {
+        margin: 0 -24px 48px;
+        padding: 62px 24px 48px;
       }
 
-      .article-header h1 {
-        font-size: clamp(2.65rem, 13vw, 3.8rem);
+      .hero h1 {
+        font-size: clamp(3rem, 14vw, 4rem);
       }
 
-      .article-body {
-        padding: 52px 25px 66px;
-        font-size: 1rem;
+      .orbit {
+        right: -105px;
+        opacity: 0.55;
       }
 
-      .article-body h2 {
-        margin-top: 2.6em;
+      .book-note {
+        grid-template-columns: 1fr;
+        gap: 25px;
+
+        margin-bottom: 60px;
+        padding: 30px 27px;
       }
 
-      .article-body blockquote {
-        padding: 20px;
+      .book-button {
+        width: 100%;
       }
 
-      .github-promo {
-        margin: 0 24px 55px;
-        padding: 29px 24px;
+      .essay-card {
+        grid-template-columns: 55px minmax(0, 1fr);
+        gap: 16px;
+
+        padding: 25px 23px;
       }
 
-      .article-navigation {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 26px 24px;
+      .essay-arrow {
+        display: none;
       }
 
       .site-footer {
         flex-direction: column;
-        padding: 22px 24px;
       }
     }
 
     @media (max-width: 480px) {
-      .article-header h1 {
-        font-size: 2.55rem;
+      .site-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .list-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .list-heading h2 {
+        font-size: 1.95rem;
+      }
+
+      .essay-card {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -586,7 +535,8 @@
         scroll-behavior: auto;
       }
 
-      .github-button {
+      .book-button,
+      .essay-card {
         transition: none;
       }
     }
@@ -595,97 +545,125 @@
 
 <body>
   <div class="page">
-    <header class="topbar">
-      <a class="wordmark" href="{{ '/' | relative_url }}">
+    <header class="site-header">
+      <a class="site-title" href="{{ '/' | relative_url }}">
         코드 없는 AI 스토리
       </a>
 
-      <nav aria-label="주요 메뉴">
-        <a href="{{ '/essay/' | relative_url }}">전체 글</a>
-        <a href="{{ '/' | relative_url }}">처음으로</a>
-      </nav>
+      <a class="home-link" href="{{ '/' | relative_url }}">
+        처음으로
+      </a>
     </header>
 
     <main>
-      <article>
-        <header class="article-header">
-          <p class="issue">
-            ESSAY{% if page.issue %} · ISSUE {{ page.issue }}{% endif %}{% if page.category %} · {{ page.category | escape }}{% endif %}
+      <section class="hero">
+        <span class="orbit" aria-hidden="true"></span>
+
+        <p class="eyebrow">ALL ESSAYS</p>
+
+        <h1>
+          <span class="gradient-text">전체 글</span>
+        </h1>
+
+        <p class="hero-description">
+          AI와 기술을 코드 없이 쉽게 설명합니다. 처음부터 순서대로 읽어도 좋고,
+          궁금한 제목부터 골라도 좋습니다.
+        </p>
+      </section>
+
+      <aside class="book-note" aria-labelledby="book-note-title">
+        <div>
+          <p class="section-label">FROM THE BOOK</p>
+
+          <h2 id="book-note-title">
+            <span class="gradient-text">Do it! 쉽게 배우는</span>
+            머신러닝 + 딥러닝
+          </h2>
+
+          <p>
+            책에서 다루는 AI 개념을 코드 없이 조금 더 가볍게 풀어내는
+            에세이입니다.
           </p>
-
-          <h1>{{ page.title | escape }}</h1>
-
-          {% if page.description %}
-            <p class="description">
-              {{ page.description | escape }}
-            </p>
-          {% endif %}
-
-          <div class="meta">
-            {% if page.author %}
-              <span>{{ page.author | escape }}</span>
-            {% endif %}
-
-            {% if page.date %}
-              <span>
-                {{ page.date | date: "%Y년 %-m월 %-d일" }}
-              </span>
-            {% endif %}
-
-            {% if page.reading_time %}
-              <span>{{ page.reading_time | escape }}</span>
-            {% endif %}
-          </div>
-        </header>
-
-        <div class="article-body">
-          {{ content }}
         </div>
 
-        <aside
-          class="github-promo"
-          aria-label="GitHub 저장소 소개"
+        <a
+          class="book-button"
+          href="https://product.kyobobook.co.kr/detail/S000220806717"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <p class="github-label">MORE ON GITHUB</p>
+          책 구매하러 가기 →
+        </a>
+      </aside>
 
-          <h2>책과 실습 자료도 함께 살펴보세요.</h2>
+      <section aria-labelledby="essay-list-title">
+        <div class="list-heading">
+          <h2 id="essay-list-title">글 목록</h2>
 
-          <p class="github-description">
-            머신러닝과 딥러닝을 직접 실행하며 배울 수 있는 코드와 관련 자료를
-            GitHub에서 확인할 수 있습니다.
-          </p>
+          <span class="essay-count">
+            총 {{ essays | size }}편
+          </span>
+        </div>
 
-          <a
-            class="github-button"
-            href="https://github.com/hongjai-rhee/public"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub 저장소 방문하기 →
-          </a>
-        </aside>
+        <div class="essay-list">
+          {% for essay in essays %}
+            <a
+              class="essay-card"
+              href="{{ essay.url | relative_url }}"
+              aria-label="{{ essay.title | escape }} 읽기"
+            >
+              <span class="essay-number">
+                {{ essay.issue | default: forloop.index }}
+              </span>
 
-        <nav class="article-navigation" aria-label="글 이동">
-          <a href="{{ '/essay/' | relative_url }}">
-            ← 전체 글 목록
-          </a>
+              <div>
+                <h3>{{ essay.title | escape }}</h3>
 
-          <a href="{{ '/' | relative_url }}">
-            처음으로 →
-          </a>
-        </nav>
-      </article>
+                {% if essay.description %}
+                  <p class="essay-description">
+                    {{ essay.description | escape }}
+                  </p>
+                {% endif %}
+
+                <p class="essay-meta">
+                  {% if essay.date %}
+                    <span>
+                      {{ essay.date | date: "%Y년 %-m월 %-d일" }}
+                    </span>
+                  {% endif %}
+
+                  {% if essay.author %}
+                    <span>{{ essay.author | escape }}</span>
+                  {% endif %}
+
+                  {% if essay.reading_time %}
+                    <span>{{ essay.reading_time | escape }}</span>
+                  {% endif %}
+                </p>
+              </div>
+
+              <span class="essay-arrow" aria-hidden="true">→</span>
+            </a>
+          {% endfor %}
+
+          {% unless essays.size > 0 %}
+            <p class="empty-state">
+              첫 번째 에세이를 준비하고 있습니다.
+            </p>
+          {% endunless %}
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span>
+          © {{ site.time | date: "%Y" }} 코드 없는 AI 스토리
+        </span>
+
+        <span>
+          어렵게 말하지 않는 AI와 기술 이야기
+        </span>
+      </footer>
     </main>
-
-    <footer class="site-footer">
-      <span>
-        © {{ site.time | date: "%Y" }} 코드 없는 AI 스토리
-      </span>
-
-      <span>
-        어렵게 말하지 않는 AI와 기술 이야기
-      </span>
-    </footer>
   </div>
 </body>
 </html>
