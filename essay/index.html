@@ -1,35 +1,37 @@
+---
+---
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>전체 글 | 코드 없는 AI 스토리</title>
+  <title>{{ page.title | escape }} | 코드 없는 AI 스토리</title>
 
   <meta
     name="description"
-    content="AI와 기술을 코드 없이 쉽게 설명하는 에세이 목록"
+    content="{{ page.description | default: site.description | escape }}"
   >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;700&display=swap"
     rel="stylesheet"
+    as="style"
+    crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
   >
 
   <style>
     :root {
-      --background: #e9e1cf;
-      --paper: #fbf8ef;
-      --paper-dark: #f2ead8;
-      --ink: #2e2922;
-      --soft-ink: #786b5a;
-      --accent: #965c42;
-      --accent-dark: #74422f;
-      --line: #d8c7a6;
-      --white: #fffdf7;
+      --cyan: #16bdd2;
+      --cyan-deep: #079ebc;
+      --cyan-soft: #e8fbff;
+      --purple: #6936a7;
+      --purple-deep: #512487;
+      --purple-soft: #f3edff;
+      --ink: #16131c;
+      --muted: #696377;
+      --line: #e7e1ee;
+      --white: #ffffff;
     }
 
     * {
@@ -42,276 +44,481 @@
 
     body {
       margin: 0;
-      background: var(--background);
+
+      background:
+        radial-gradient(
+          circle at 9% 5%,
+          rgba(22, 189, 210, 0.13),
+          transparent 26%
+        ),
+        radial-gradient(
+          circle at 92% 18%,
+          rgba(105, 54, 167, 0.12),
+          transparent 27%
+        ),
+        #f7fbfd;
+
       color: var(--ink);
-      font-family: "Noto Sans KR", sans-serif;
-      line-height: 1.8;
+
+      font-family:
+        Pretendard,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Malgun Gothic",
+        sans-serif;
+
+      line-height: 1.85;
       word-break: keep-all;
     }
 
     a {
-      color: inherit;
+      color: var(--purple);
     }
 
-    /*
-      흰색 종이 영역의 최대 폭입니다.
-      이 값을 980px로 제한해 양옆 여백이 항상 보이게 합니다.
-    */
     .page {
       width: calc(100% - 48px);
       max-width: 980px;
       min-height: calc(100vh - 64px);
       margin: 32px auto;
       overflow: hidden;
-      background: var(--paper);
-      border: 1px solid rgba(116, 93, 61, 0.12);
-      border-radius: 4px;
-      box-shadow: 0 18px 45px rgba(77, 59, 33, 0.1);
+
+      background: var(--white);
+      border: 1px solid rgba(105, 54, 167, 0.12);
+      border-radius: 6px;
+      box-shadow: 0 24px 70px rgba(75, 39, 123, 0.11);
     }
 
-    .site-header {
+    .topbar {
+      position: relative;
+      z-index: 10;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 30px;
+      gap: 24px;
+
       padding: 25px 52px;
+
+      background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid var(--line);
     }
 
-    .site-title,
-    .home-link {
+    .wordmark {
+      color: var(--ink);
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: -0.035em;
       text-decoration: none;
     }
 
-    .site-title {
-      font-family: "Noto Serif KR", serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-
-    .home-link {
-      color: var(--soft-ink);
-      font-size: 0.94rem;
-    }
-
-    .site-title:hover,
-    .home-link:hover {
-      color: var(--accent);
-    }
-
-    main {
-      padding: 0 52px 72px;
-    }
-
-    .hero {
-      max-width: 760px;
-      padding: 86px 0 62px;
-    }
-
-    .eyebrow {
-      display: block;
-      margin-bottom: 20px;
-      color: var(--accent);
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.27em;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Noto Serif KR", serif;
-    }
-
-    h1 {
-      margin: 0 0 25px;
-      font-size: clamp(3.2rem, 7vw, 4.8rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.07em;
-    }
-
-    .hero-description {
-      max-width: 700px;
-      margin: 0;
-      color: var(--soft-ink);
-      font-size: 1.05rem;
-      line-height: 1.9;
-    }
-
-    /* 책 소개 */
-
-    .book-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 34px;
-      margin-bottom: 82px;
-      padding: 38px 40px;
-      overflow: hidden;
-      background: var(--paper-dark);
-      border: 1px solid var(--line);
-    }
-
-    .book-card::before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 5px;
-      background: var(--accent);
-      content: "";
-    }
-
-    .book-label {
-      display: block;
-      margin-bottom: 13px;
-      color: var(--accent);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.24em;
-    }
-
-    .book-card h2 {
-      margin: 0 0 15px;
-      font-size: 1.75rem;
-      line-height: 1.45;
-      letter-spacing: -0.04em;
-    }
-
-    .book-card p {
-      max-width: 590px;
-      margin: 0;
-      color: var(--soft-ink);
-      font-size: 0.93rem;
-      line-height: 1.85;
-    }
-
-    .book-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 158px;
-      padding: 13px 18px;
-      background: var(--accent);
-      color: var(--white);
-      border: 1px solid var(--accent);
-      text-decoration: none;
-      font-size: 0.87rem;
-      font-weight: 600;
-      white-space: nowrap;
-      transition:
-        background 160ms ease,
-        border-color 160ms ease,
-        transform 160ms ease;
-    }
-
-    .book-button:hover {
-      background: var(--accent-dark);
-      border-color: var(--accent-dark);
-      transform: translateY(-2px);
-    }
-
-    /* 글 목록 */
-
-    .list-heading {
+    .topbar nav {
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 25px;
-    }
-
-    .list-heading h2 {
-      margin: 0;
-      font-size: 2.55rem;
-      line-height: 1.25;
-      letter-spacing: -0.06em;
-    }
-
-    .essay-count {
-      margin-bottom: 5px;
-      color: var(--soft-ink);
-      font-size: 0.88rem;
-    }
-
-    .essay-list {
-      display: grid;
+      flex-wrap: wrap;
       gap: 18px;
     }
 
-    /*
-      카드 전체가 링크입니다.
-      카드의 빈 공간을 눌러도 본문으로 이동합니다.
-    */
-    .essay-card {
-      display: grid;
-      grid-template-columns: 68px minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 26px;
-      padding: 30px 32px;
-      background: rgba(255, 253, 247, 0.7);
-      border: 1px solid var(--line);
+    .topbar nav a {
+      color: var(--muted);
+      font-size: 0.87rem;
+      font-weight: 650;
       text-decoration: none;
+    }
+
+    .wordmark:hover,
+    .topbar nav a:hover {
+      color: var(--purple);
+    }
+
+    .article-header {
+      position: relative;
+
+      padding: 88px 62px 70px;
+      overflow: hidden;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          155deg,
+          #ffffff 17%,
+          var(--cyan-soft) 56%,
+          var(--purple-soft)
+        );
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .article-header::before,
+    .article-header::after {
+      position: absolute;
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .article-header::before {
+      top: -95px;
+      left: -65px;
+
+      width: 270px;
+      height: 270px;
+
+      background:
+        radial-gradient(
+          circle at 55% 55%,
+          rgba(255, 255, 255, 0.8),
+          rgba(22, 189, 210, 0.24),
+          transparent 70%
+        );
+    }
+
+    .article-header::after {
+      right: -70px;
+      bottom: -110px;
+
+      width: 300px;
+      height: 300px;
+
+      background:
+        radial-gradient(
+          circle at 40% 40%,
+          rgba(255, 255, 255, 0.84),
+          rgba(105, 54, 167, 0.2),
+          transparent 70%
+        );
+    }
+
+    .issue {
+      position: relative;
+      z-index: 2;
+
+      margin: 0 0 19px;
+
+      color: var(--purple);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+    }
+
+    .article-header h1 {
+      position: relative;
+      z-index: 2;
+
+      max-width: 760px;
+      margin: 0 auto;
+
+      background:
+        linear-gradient(
+          92deg,
+          var(--cyan) 0%,
+          #2498ca 43%,
+          var(--purple) 92%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      font-size: clamp(2.8rem, 7vw, 4.65rem);
+      font-weight: 850;
+      line-height: 1.16;
+      letter-spacing: -0.06em;
+      overflow-wrap: anywhere;
+    }
+
+    .description {
+      position: relative;
+      z-index: 2;
+
+      max-width: 620px;
+      margin: 24px auto 0;
+
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .meta {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .meta span + span::before {
+      margin-right: 8px;
+      color: rgba(105, 54, 167, 0.42);
+      content: "·";
+    }
+
+    .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 68px 42px 82px;
+
+      color: #342f3b;
+      font-size: 1.02rem;
+      line-height: 1.95;
+      overflow-wrap: anywhere;
+    }
+
+    .article-body > :first-child {
+      margin-top: 0;
+    }
+
+    .article-body p {
+      margin: 1.35em 0;
+    }
+
+    .article-body h1 {
+      display: none;
+    }
+
+    .article-body h2 {
+      position: relative;
+
+      margin: 3.1em 0 1em;
+      padding: 0 0 13px 19px;
+
+      color: var(--ink);
+      font-size: 1.72rem;
+      font-weight: 820;
+      line-height: 1.45;
+      letter-spacing: -0.04em;
+
+      border-bottom: 1px solid var(--line);
+      overflow-wrap: anywhere;
+    }
+
+    .article-body h2::before {
+      position: absolute;
+      top: 0.18em;
+      bottom: 0.62em;
+      left: 0;
+
+      width: 5px;
+
+      background: linear-gradient(var(--cyan), var(--purple));
+      border-radius: 999px;
+
+      content: "";
+    }
+
+    .article-body h3 {
+      margin: 2.35em 0 0.8em;
+
+      color: var(--purple);
+      font-size: 1.28rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .article-body strong {
+      color: var(--purple-deep);
+    }
+
+    .article-body blockquote {
+      margin: 2em 0;
+      padding: 23px 26px;
+
+      color: #3b3150;
+
+      background:
+        linear-gradient(
+          110deg,
+          var(--cyan-soft),
+          var(--purple-soft)
+        );
+
+      border-left: 5px solid var(--purple);
+      border-radius: 0 14px 14px 0;
+
+      font-size: 1.03rem;
+      font-weight: 650;
+    }
+
+    .article-body blockquote p {
+      margin: 0;
+    }
+
+    .article-body table {
+      display: block;
+      width: 100%;
+      margin: 2.2em 0;
+      overflow-x: auto;
+
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .article-body th,
+    .article-body td {
+      padding: 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .article-body th {
+      color: var(--purple-deep);
+      background: var(--purple-soft);
+      font-weight: 750;
+    }
+
+    .article-body tr:nth-child(even) td {
+      background: rgba(232, 251, 255, 0.48);
+    }
+
+    .article-body code {
+      padding: 2px 7px;
+
+      color: var(--purple-deep);
+      background: var(--purple-soft);
+
+      border: 1px solid rgba(105, 54, 167, 0.16);
+      border-radius: 5px;
+
+      font-size: 0.9em;
+    }
+
+    .article-body hr {
+      margin: 3.5em 0;
+      border: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .article-body a {
+      color: var(--purple);
+      font-weight: 650;
+      text-underline-offset: 4px;
+    }
+
+    .github-promo {
+      max-width: 650px;
+      margin: 0 auto 70px;
+      padding: 35px;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          115deg,
+          var(--cyan-soft),
+          #ffffff 48%,
+          var(--purple-soft)
+        );
+
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .github-label {
+      margin: 0 0 10px;
+
+      color: var(--purple);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+    }
+
+    .github-promo h2 {
+      margin: 0;
+
+      color: var(--ink);
+      font-size: 1.4rem;
+      font-weight: 820;
+      letter-spacing: -0.035em;
+    }
+
+    .github-description {
+      margin: 13px auto 21px;
+
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+
+    .github-button {
+      display: inline-flex;
+      min-height: 45px;
+      align-items: center;
+      justify-content: center;
+
+      padding: 11px 21px;
+
+      background: var(--purple);
+      border-radius: 999px;
+
+      color: var(--white);
+      font-size: 0.87rem;
+      font-weight: 750;
+      text-decoration: none;
+
       transition:
-        border-color 160ms ease,
-        box-shadow 160ms ease,
+        background 160ms ease,
         transform 160ms ease;
     }
 
-    .essay-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(84, 60, 32, 0.08);
-      transform: translateY(-3px);
+    .github-button:hover {
+      background: var(--purple-deep);
+      transform: translateY(-2px);
     }
 
-    .essay-number {
-      color: var(--accent);
-      font-family: "Noto Serif KR", serif;
-      font-size: 1.7rem;
-      font-weight: 600;
-    }
+    .article-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
 
-    .essay-content h3 {
-      margin: 0 0 9px;
-      font-size: 1.42rem;
-      line-height: 1.5;
-      letter-spacing: -0.04em;
-    }
+      padding: 28px 52px;
 
-    .essay-description {
-      margin: 0 0 10px;
-      color: var(--soft-ink);
-      font-size: 0.94rem;
-    }
+      background:
+        linear-gradient(
+          110deg,
+          var(--cyan-soft),
+          var(--purple-soft)
+        );
 
-    .essay-meta {
-      margin: 0;
-      color: var(--soft-ink);
-      font-size: 0.8rem;
-    }
-
-    .essay-arrow {
-      color: var(--accent);
-      font-size: 1.45rem;
-      transition: transform 160ms ease;
-    }
-
-    .essay-card:hover .essay-arrow {
-      transform: translateX(5px);
-    }
-
-    footer {
-      margin-top: 68px;
-      padding-top: 24px;
       border-top: 1px solid var(--line);
-      color: var(--soft-ink);
-      font-size: 0.8rem;
     }
 
-    /* 태블릿과 휴대전화 */
+    .article-navigation a {
+      color: var(--purple);
+      font-size: 0.88rem;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .article-navigation a:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding: 23px 52px;
+
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.76rem;
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(22, 189, 210, 0.42);
+      outline-offset: 4px;
+    }
 
     @media (max-width: 760px) {
       .page {
@@ -320,81 +527,67 @@
         margin: 10px auto;
       }
 
-      .site-header {
-        padding: 21px 25px;
-      }
-
-      main {
-        padding: 0 25px 55px;
-      }
-
-      .hero {
-        padding: 62px 0 46px;
-      }
-
-      h1 {
-        margin-bottom: 20px;
-        font-size: clamp(2.8rem, 14vw, 4rem);
-      }
-
-      .hero-description {
-        font-size: 0.98rem;
-      }
-
-      .book-card {
-        grid-template-columns: 1fr;
-        gap: 26px;
-        margin-bottom: 65px;
-        padding: 31px 28px;
-      }
-
-      .book-card h2 {
-        font-size: 1.55rem;
-      }
-
-      .book-button {
-        width: 100%;
-      }
-
-      .list-heading {
+      .topbar {
         align-items: flex-start;
         flex-direction: column;
-        gap: 3px;
+        padding: 21px 24px;
       }
 
-      .essay-count {
-        margin: 0;
+      .topbar nav {
+        gap: 14px;
       }
 
-      .essay-card {
-        grid-template-columns: 1fr auto;
-        gap: 13px;
-        padding: 27px 25px;
+      .article-header {
+        padding: 65px 25px 52px;
       }
 
-      .essay-number {
-        grid-column: 1 / -1;
-        font-size: 1.35rem;
+      .article-header h1 {
+        font-size: clamp(2.65rem, 13vw, 3.8rem);
+      }
+
+      .article-body {
+        padding: 52px 25px 66px;
+        font-size: 1rem;
+      }
+
+      .article-body h2 {
+        margin-top: 2.6em;
+      }
+
+      .article-body blockquote {
+        padding: 20px;
+      }
+
+      .github-promo {
+        margin: 0 24px 55px;
+        padding: 29px 24px;
+      }
+
+      .article-navigation {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 26px 24px;
+      }
+
+      .site-footer {
+        flex-direction: column;
+        padding: 22px 24px;
       }
     }
 
     @media (max-width: 480px) {
-      .site-header {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 2px;
+      .article-header h1 {
+        font-size: 2.55rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .list-heading h2 {
-        font-size: 2.15rem;
-      }
-
-      .essay-card {
-        grid-template-columns: 1fr;
-      }
-
-      .essay-arrow {
-        display: none;
+      .github-button {
+        transition: none;
       }
     }
   </style>
@@ -402,93 +595,97 @@
 
 <body>
   <div class="page">
-
-    <header class="site-header">
-      <a class="site-title" href="../">
+    <header class="topbar">
+      <a class="wordmark" href="{{ '/' | relative_url }}">
         코드 없는 AI 스토리
       </a>
 
-      <a class="home-link" href="../">
-        처음으로
-      </a>
+      <nav aria-label="주요 메뉴">
+        <a href="{{ '/essay/' | relative_url }}">전체 글</a>
+        <a href="{{ '/' | relative_url }}">처음으로</a>
+      </nav>
     </header>
 
     <main>
-      <section class="hero">
-        <span class="eyebrow">ALL ESSAYS</span>
-
-        <h1>전체 글</h1>
-
-        <p class="hero-description">
-          AI와 기술을 코드 없이 쉽게 설명합니다.
-          <br>
-          처음부터 순서대로 읽어도 좋고,
-          궁금한 제목부터 골라도 좋습니다.
-        </p>
-      </section>
-
-      <aside class="book-card" aria-labelledby="book-title">
-        <div class="book-information">
-          <span class="book-label">FROM THE BOOK</span>
-
-          <h2 id="book-title">
-            Do it! 쉽게 배우는 머신러닝 + 딥러닝
-          </h2>
-
-          <p>
-            머신러닝의 기본 원리부터 신경망, 트랜스포머,
-            강화학습까지 직접 만들어 보며 원리를 익히는 입문서입니다.
-            이곳의 에세이는 책에서 다루는 AI와 기술 이야기를
-            코드 없이 조금 더 가볍게 풀어냅니다.
+      <article>
+        <header class="article-header">
+          <p class="issue">
+            ESSAY{% if page.issue %} · ISSUE {{ page.issue }}{% endif %}{% if page.category %} · {{ page.category | escape }}{% endif %}
           </p>
+
+          <h1>{{ page.title | escape }}</h1>
+
+          {% if page.description %}
+            <p class="description">
+              {{ page.description | escape }}
+            </p>
+          {% endif %}
+
+          <div class="meta">
+            {% if page.author %}
+              <span>{{ page.author | escape }}</span>
+            {% endif %}
+
+            {% if page.date %}
+              <span>
+                {{ page.date | date: "%Y년 %-m월 %-d일" }}
+              </span>
+            {% endif %}
+
+            {% if page.reading_time %}
+              <span>{{ page.reading_time | escape }}</span>
+            {% endif %}
+          </div>
+        </header>
+
+        <div class="article-body">
+          {{ content }}
         </div>
 
-        <a
-          class="book-button"
-          href="https://product.kyobobook.co.kr/detail/S000220806717"
-          target="_blank"
-          rel="noopener noreferrer"
+        <aside
+          class="github-promo"
+          aria-label="GitHub 저장소 소개"
         >
-          책 구매하러 가기&nbsp;→
-        </a>
-      </aside>
+          <p class="github-label">MORE ON GITHUB</p>
 
-      <section aria-labelledby="essay-list-title">
-        <div class="list-heading">
-          <h2 id="essay-list-title">글 목록</h2>
-          <span class="essay-count">총 1편</span>
-        </div>
+          <h2>책과 실습 자료도 함께 살펴보세요.</h2>
 
-        <div class="essay-list">
+          <p class="github-description">
+            머신러닝과 딥러닝을 직접 실행하며 배울 수 있는 코드와 관련 자료를
+            GitHub에서 확인할 수 있습니다.
+          </p>
+
           <a
-            class="essay-card"
-            href="./001-how-ai-learns.html"
-            aria-label="AI는 어떻게 학습하는가? 읽기"
+            class="github-button"
+            href="https://github.com/hongjai-rhee/public"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <span class="essay-number">01</span>
-
-            <div class="essay-content">
-              <h3>AI는 어떻게 학습하는가?</h3>
-
-              <p class="essay-description">
-                초보 어부의 이야기로 알아보는 머신러닝의 원리
-              </p>
-
-              <p class="essay-meta">
-                2026년 9월 18일 · 이홍재
-              </p>
-            </div>
-
-            <span class="essay-arrow" aria-hidden="true">→</span>
+            GitHub 저장소 방문하기 →
           </a>
-        </div>
-      </section>
+        </aside>
 
-      <footer>
-        어렵게 말하지 않는 AI와 기술 이야기 · 이홍재
-      </footer>
+        <nav class="article-navigation" aria-label="글 이동">
+          <a href="{{ '/essay/' | relative_url }}">
+            ← 전체 글 목록
+          </a>
+
+          <a href="{{ '/' | relative_url }}">
+            처음으로 →
+          </a>
+        </nav>
+      </article>
     </main>
 
+    <footer class="site-footer">
+      <span>
+        © {{ site.time | date: "%Y" }} 코드 없는 AI 스토리
+      </span>
+
+      <span>
+        어렵게 말하지 않는 AI와 기술 이야기
+      </span>
+    </footer>
   </div>
 </body>
 </html>
