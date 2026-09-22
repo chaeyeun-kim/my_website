@@ -39,10 +39,10 @@ category: "머신러닝"
 <br>
 
 <img
+  width="560"
   alt="어부 그림"
   src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4"
-  style="display: block; width: 100%; max-width: 560px; height: auto; margin: 32px auto;"
->
+/>
 
 <br>
 <br>
