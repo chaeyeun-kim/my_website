@@ -18,7 +18,7 @@ category: "머신러닝"
 
 그런데 어느 날, 어부는 돌아가신 아버지가 쓰던 낡은 수첩 하나를 발견합니다. 그 수첩에는 놀라울 정도로 많은 정보가 깨알같이 적혀 있었습니다. 
 
-<img width="746" height="497" alt="어부그림" src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4" />
+> <img width="746" height="497" alt="어부그림" src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4" />
 
 
 
