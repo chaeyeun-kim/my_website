@@ -18,10 +18,6 @@ category: "머신러닝"
 
 그런데 어느 날, 어부는 돌아가신 아버지가 쓰던 낡은 수첩 하나를 발견합니다. 그 수첩에는 놀라울 정도로 많은 정보가 깨알같이 적혀 있었습니다. 
 
-> <img width="746" height="497" alt="어부그림" src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4" />
-
-<br>
-<br>
 
 | 날짜 | 날씨와 바람 | 장소 | 잡은 물고기 | 수입 |
 |---|---|---|---|---:|
@@ -38,6 +34,18 @@ category: "머신러닝"
 그리고 이렇게 판단합니다.
 
 > “오늘의 기상과 바다 상태에서는 C 포인트로 가는 것이 좋겠군.”
+
+<br>
+<br>
+
+<img
+  alt="어부 그림"
+  src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4"
+  style="display: block; width: 100%; max-width: 560px; height: auto; margin: 32px auto;"
+>
+
+<br>
+<br>
 
 바로 이것이 머신러닝(기계학습)의 기본적인 형태입니다.
 
