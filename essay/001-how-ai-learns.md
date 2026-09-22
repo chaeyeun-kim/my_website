@@ -20,7 +20,8 @@ category: "머신러닝"
 
 > <img width="746" height="497" alt="어부그림" src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4" />
 
-
+<br>
+<br>
 
 | 날짜 | 날씨와 바람 | 장소 | 잡은 물고기 | 수입 |
 |---|---|---|---|---:|
