@@ -35,17 +35,12 @@ category: "머신러닝"
 
 > “오늘의 기상과 바다 상태에서는 C 포인트로 가는 것이 좋겠군.”
 
-<br>
-<br>
-
 <img
-  width="560"
+  width="600"
   alt="어부 그림"
   src="https://github.com/user-attachments/assets/a1e09a6e-2afc-425c-8a64-7a34c2a283f4"
 />
 
-<br>
-<br>
 
 바로 이것이 머신러닝(기계학습)의 기본적인 형태입니다.
 
