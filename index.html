@@ -1,7 +1,14 @@
 ---
 ---
-{% assign essays = site.pages | where: "layout", "essay" | sort: "date" | reverse %}
-{% assign latest_essay = essays | first %}
+{% assign all_essays = site.pages | where: "layout", "essay" %}
+{% assign intro_essay = all_essays | where: "intro", true | first %}
+{% assign regular_essays = all_essays
+  | where_exp: "essay", "essay.intro != true"
+  | sort: "date"
+  | reverse
+%}
+{% assign latest_essay = regular_essays | first %}
+
 <!doctype html>
 <html lang="ko">
 <head>
